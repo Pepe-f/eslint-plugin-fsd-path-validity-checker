@@ -16,16 +16,33 @@ const rule = require("../../../lib/rules/path-checker"),
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+});
 ruleTester.run("path-checker", rule, {
   valid: [
-    // give me some code that won't trigger a warning
+    {
+      filename: '/home/nikko/code/good-react-project/src/entities/Article/model/slices/addCommentFormSlice.ts',
+      code: "import { addCommentFormActions, addCommentFormReducer } from '../../model/slices/addCommentFormSlice'",
+      errors: [],
+    },
   ],
 
   invalid: [
     {
-      code: "asd",
-      errors: [{ message: "Fill me in.", type: "Me too" }],
+      filename: '/home/nikko/code/good-react-project/src/entities/Article/model/slices/addCommentFormSlice.ts',
+      code: "import { addCommentFormActions, addCommentFormReducer } from 'entities/Article/model/slices/addCommentFormSlice'",
+      errors: [{ message: "Within one slice, all paths must be relative" }],
+    },
+    {
+      filename: '/home/nikko/code/good-react-project/src/entities/Article/model/slices/addCommentFormSlice.ts',
+      code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/model/slices/addCommentFormSlice'",
+      errors: [{ message: "Within one slice, all paths must be relative" }],
+      options: [
+        {
+          alias: '@'
+        }
+      ]
     },
   ],
 });
