@@ -66,6 +66,7 @@ ruleTester.run("public-api-imports", rule, {
       code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/model/slices/addCommentFormSlice'",
       errors: [{ message: 'Absolute import is allowed only from Public API (index.ts)' }],
       options: aliasOptions,
+      output: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article'",
     },
     {
       filename: '/home/nikko/code/good-react-project/src/features/StoreDecorator.tsx',
@@ -77,6 +78,7 @@ ruleTester.run("public-api-imports", rule, {
           testFilesPatterns: ['**/*.test.*', '**/*.story.*', '**/StoreDecorator.tsx'],
         },
       ],
+      output: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article'",
     },
     {
       filename: '/home/nikko/code/good-react-project/src/features/Forbidden.tsx',
