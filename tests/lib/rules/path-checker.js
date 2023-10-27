@@ -33,6 +33,7 @@ ruleTester.run("path-checker", rule, {
       filename: '/home/nikko/code/good-react-project/src/entities/Article/model/slices/addCommentFormSlice.ts',
       code: "import { addCommentFormActions, addCommentFormReducer } from 'entities/Article/model/slices/addCommentFormSlice'",
       errors: [{ message: "Within one slice, all paths must be relative" }],
+      output: "import { addCommentFormActions, addCommentFormReducer } from './addCommentFormSlice'",
     },
     {
       filename: '/home/nikko/code/good-react-project/src/entities/Article/model/slices/addCommentFormSlice.ts',
@@ -42,7 +43,8 @@ ruleTester.run("path-checker", rule, {
         {
           alias: '@'
         }
-      ]
+      ],
+      output: "import { addCommentFormActions, addCommentFormReducer } from './addCommentFormSlice'",
     },
   ],
 });
